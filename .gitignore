@@ -1,0 +1,10 @@
+
+# ignore eclipse files
+.projext
+.classpath
+.settings/
+
+# ignore binaries
+bin/
+target/
+
