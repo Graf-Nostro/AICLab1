@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- The Basics -->
+	<groupId>AIC-34</groupId>
+	<artifactId>AICLab1-client</artifactId>
+	<packaging>jar</packaging>
+
+	<dependencies>
+
+	</dependencies>
+
+	<parent>
+		<groupId>AIC-34</groupId>
+		<artifactId>AICLab1</artifactId>
+		<version>1.0</version>
+    	<relativePath>../</relativePath>
+	</parent>
+</project>
+

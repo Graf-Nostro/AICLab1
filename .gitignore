@@ -3,8 +3,18 @@
 .projext
 .classpath
 .settings/
+server/.projext
+server/.classpath
+server/.settings/
+client/.projext
+client/.classpath
+client/.settings/
 
 # ignore binaries
 bin/
 target/
+server/bin
+server/target
+client/bin
+client/target
 
