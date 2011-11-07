@@ -15,7 +15,8 @@
 		<module>AICLab1-common</module>
 		<module>AICLab1-server</module>
 		<module>AICLab1-client</module>
-	</modules>
+		<module>AICLab1-legacy</module>
+  </modules>
 	
 	<build>
 		<plugins>

@@ -6,7 +6,7 @@
 
 	<!-- The Basics -->
 	<groupId>AIC-34</groupId>
-	<artifactId>AICLab1-common</artifactId>
+	<artifactId>AICLab1-legacy</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>

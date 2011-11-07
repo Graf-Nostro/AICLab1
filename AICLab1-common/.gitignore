@@ -1,4 +1,7 @@
 
+# ignore tmp files
+*~
+
 # ignore eclipse files
 .project
 .classpath
