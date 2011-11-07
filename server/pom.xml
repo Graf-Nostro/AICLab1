@@ -9,7 +9,12 @@
 	<artifactId>AICLab1-server</artifactId>
 	<packaging>jar</packaging>
 
+	<properties>
+		<cxf.version>2.5.0</cxf.version>
+	</properties>
+	
 	<dependencies>
+		<!-- Jetty -->
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-http</artifactId>
@@ -29,6 +34,24 @@
     		<groupId>org.eclipse.jetty</groupId>
     		<artifactId>jetty-servlet</artifactId>
     		<version>8.0.4.v20111024</version>
+		</dependency>
+<!-- 
+		<dependency>
+			<groupId>org.apache.neethi</groupId>
+			<artifactId>neethi</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+-->
+		<!-- Apache CXF -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
 		</dependency>
 	</dependencies>
 

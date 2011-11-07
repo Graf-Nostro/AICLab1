@@ -5,7 +5,6 @@ import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
 import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
-import org.apache.cxf.transport.servlet.CXFServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandlerCollection;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -16,7 +15,7 @@ import test.TestWSImpl;
 public class MyServer {
 	public static void main( String[] args ) throws Exception {
 		// create embedded jetty server
-		Server httpServer = new Server();
+		Server httpServer = new Server( 8080 );
 		
 		// create HTTP request handler	
 		ContextHandlerCollection contexts = new ContextHandlerCollection();
@@ -28,9 +27,9 @@ public class MyServer {
 		// create CXF servlet
 		CXFNonSpringServlet cxf = new CXFNonSpringServlet();
 		ServletHolder servlet = new ServletHolder(cxf);
-		servlet.setName("soap");
-		servlet.setForcedPath("soap");
-		root.addServlet(servlet, "/soap/*");
+		servlet.setName("cxf");
+		servlet.setForcedPath("cxf");
+		root.addServlet(servlet, "/cxf/*");
 		
 		// start jetty server
 		httpServer.start();
