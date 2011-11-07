@@ -1,5 +1,7 @@
 package at.ac.tuwien.infosys.aic11.services;
 
-public class RatingServiceImpl {
+import javax.jws.WebService;
+
+public class RatingServiceImpl implements RatingService {
 
 }
