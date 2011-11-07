@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- The Basics -->
+	<groupId>AIC-34</groupId>
+	<artifactId>AICLab1-client</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<cxf.version>2.5.0</cxf.version>
+	</properties>
+	
+	<dependencies>
+		<!-- AIC1 service interfaces -->
+		<dependency>
+			<groupId>AIC-34</groupId>
+			<artifactId>AICLab1-common</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- Apache CXF -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+	</dependencies>
+
+	<parent>
+		<groupId>AIC-34</groupId>
+		<artifactId>AICLab1</artifactId>
+		<version>1.0</version>
+    	<relativePath>../</relativePath>
+	</parent>
+</project>
+
