@@ -18,7 +18,7 @@ public class AIC1Client {
 		factory.setServiceClass( TestService.class );
 		factory.setAddress(
 			String.format(
-				"http://localhost:%d/%s/test", 
+				"http://localhost:%d/%s/testWS", 
 				cfg.getInt("http.server.port"),
 				cfg.get("http.servlet.path")
 			)
