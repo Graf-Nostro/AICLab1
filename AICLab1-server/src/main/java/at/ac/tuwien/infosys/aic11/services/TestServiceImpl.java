@@ -3,7 +3,7 @@ package at.ac.tuwien.infosys.aic11.services;
 import javax.jws.WebService;
 
 @WebService( serviceName="testWS" )
-public class TestServiceImpl implements TestService {
+public class TestServiceImpl implements TestService, AbstractWebService {
 	@Override
 	public String foo() {
 		return "foo";
