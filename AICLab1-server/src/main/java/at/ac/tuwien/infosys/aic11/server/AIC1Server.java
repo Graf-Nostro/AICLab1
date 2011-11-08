@@ -2,7 +2,6 @@ package at.ac.tuwien.infosys.aic11.server;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 
@@ -92,10 +91,10 @@ public class AIC1Server {
 	@Autowired
 	@Qualifier("CXF")
 	private CXFNonSpringServlet       cxfServlet;
-	@Resource
+	@Autowired
 	@Qualifier("CXF")
 	private List<AbstractWebService>  webServices;
-	@Resource
+	@Autowired
 	@Qualifier("CXF")
 	private List<AbstractRestService> restServices;
 	@Autowired

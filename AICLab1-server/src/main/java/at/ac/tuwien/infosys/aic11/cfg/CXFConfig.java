@@ -1,8 +1,5 @@
 package at.ac.tuwien.infosys.aic11.cfg;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -32,20 +29,28 @@ public class CXFConfig {
 	
 	@Bean
 	@Qualifier("CXF")
-	List<AbstractWebService> webServices() {
-		return Arrays.asList(
-			new ContractManagementServiceImpl(),
-			new CustomerRelationsManagementServiceImpl(),
-			new ShippingServiceImpl(),
-			new TestServiceImpl()
-		);
+	AbstractWebService contractWS() {
+		return new ContractManagementServiceImpl();		
+	}
+	@Bean
+	@Qualifier("CXF")
+	AbstractWebService customerWS() {
+		return new CustomerRelationsManagementServiceImpl();
+	}
+	@Bean
+	@Qualifier("CXF")
+	AbstractWebService shippingWS() {
+		return new ShippingServiceImpl();
+	}
+	@Bean
+	@Qualifier("CXF")
+	AbstractWebService testWS() {
+		return new TestServiceImpl();
 	}
 	
 	@Bean
 	@Qualifier("CXF")
-	List<AbstractRestService> restServices() {
-		return Arrays.<AbstractRestService>asList(
-			new RatingServiceImpl()
-		);
+	AbstractRestService ratingWS() {
+		return new RatingServiceImpl();
 	}
 }
