@@ -42,8 +42,7 @@ public class TestServiceImpl implements TestService, AbstractWebService {
 
 	@Override
 	public Cheque getCheque() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Cheque("test");
 	}
 
 	@Override
