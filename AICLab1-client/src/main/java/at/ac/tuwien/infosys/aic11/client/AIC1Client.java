@@ -26,10 +26,7 @@ public class AIC1Client {
 
 		TestService testWS = (TestService) factory.create();
 		
-		System.out.print( testWS.bar( "world" ) );
+		System.out.print( testWS.getWarrantor() );
 		
-//		Employee employee = client.getEmployee("0223938");
-//		System.out.println("Server said: " + employee.getLastName() + ", " + employee.getFirstName());
-//		System.exit(0);
 	}
 }
