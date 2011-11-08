@@ -19,4 +19,6 @@
                            http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
        default-autowire="autodetect">
 
+	<!-- enable AspectJ -->
+	<aop:aspectj-autoproxy/>
 </beans>

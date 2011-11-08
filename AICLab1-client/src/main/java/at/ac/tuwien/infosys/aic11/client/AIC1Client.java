@@ -26,7 +26,7 @@ public class AIC1Client {
 
 		TestService testWS = (TestService) factory.create();
 		
-		System.out.print( testWS.getWarrantor() );
+		System.out.print( testWS.bar("foo") );
 		
 	}
 }
