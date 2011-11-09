@@ -5,11 +5,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import at.ac.tuwien.infosys.aic11.services.AbstractRestService;
 import at.ac.tuwien.infosys.aic11.services.AbstractWebService;
 import at.ac.tuwien.infosys.aic11.services.ContractManagementServiceImpl;
 import at.ac.tuwien.infosys.aic11.services.CustomerRelationsManagementServiceImpl;
 import at.ac.tuwien.infosys.aic11.services.RatingServiceImpl;
+import at.ac.tuwien.infosys.aic11.services.RestService;
 import at.ac.tuwien.infosys.aic11.services.ShippingServiceImpl;
 import at.ac.tuwien.infosys.aic11.services.TestServiceImpl;
 
@@ -50,7 +50,7 @@ public class CXFConfig {
 	
 	@Bean
 	@Qualifier("CXF")
-	AbstractRestService ratingWS() {
+	RestService ratingWS() {
 		return new RatingServiceImpl();
 	}
 }

@@ -17,7 +17,7 @@ import at.ac.tuwien.infosys.aic11.dto.Rating;
 import at.ac.tuwien.infosys.aic11.dto.Warrantor;
 
 @WebService( serviceName="testWS" )
-public class TestServiceImpl implements TestService, AbstractWebService {
+public class TestServiceImpl extends AbstractService implements AbstractWebService, TestService {
 	@Override
 	public String foo() {
 		return "foo";

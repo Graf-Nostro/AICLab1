@@ -57,7 +57,7 @@
 			<artifactId>cxf-bundle-jaxrs</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
-		<!-- Spring IoC -->
+		<!-- Spring IoC and AOP -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
@@ -68,6 +68,21 @@
 		   <groupId>org.apache.cxf</groupId>
 		   <artifactId>cxf-rt-ws-security</artifactId>
 		   <version>${cxf.version}</version>
+		   </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>3.0.6.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.11</version>
 		</dependency>
 	</dependencies>
 

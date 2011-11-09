@@ -20,19 +20,23 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import at.ac.tuwien.infosys.aic11.cfg.CXFConfig;
 import at.ac.tuwien.infosys.aic11.cfg.JettyConfig;
+import at.ac.tuwien.infosys.aic11.cfg.LoggingAopConfig;
 import at.ac.tuwien.infosys.aic11.cfg.XmlConfig;
-import at.ac.tuwien.infosys.aic11.services.AbstractRestService;
+import at.ac.tuwien.infosys.aic11.services.RestService;
 import at.ac.tuwien.infosys.aic11.services.AbstractWebService;
 
 public class AIC1Server {
 	public static void main( String[] args ) throws Exception {
 		// wire up spring IoC
 		BeanFactory ctx = new AnnotationConfigApplicationContext( 
-			JettyConfig.class,  // settings for our HTTP server
-			CXFConfig.class,    // settings for our web service framework
-			XmlConfig.class,    // other settings from spring XML cfg
-			AIC1Server.class    // settings for this class
+			JettyConfig.class,      // settings for our HTTP server
+			CXFConfig.class,        // settings for our web service framework
+			XmlConfig.class,        // other settings from spring XML cfg
+			LoggingAopConfig.class, // enable method call logging
+			AIC1Server.class        // settings for this class
 		);
+
+//		print( ctx.getBean( "_bean" ) );
 		
 		ctx.getBean( AIC1Server.class ).start();
 	}
@@ -51,14 +55,16 @@ public class AIC1Server {
 		BusFactory.setDefaultBus(bus);
 	
 		for ( AbstractWebService webService : webServices ) {
-			WebService metaData = webService.getClass().getAnnotation( WebService.class );
+			Class<?> serviceClass = webService.getServiceClass();
+			
+			WebService metaData = serviceClass.getAnnotation( WebService.class );
 			
 			String serviceName;
 			
 			if ( metaData != null && metaData.serviceName() != null ) {
 				serviceName = metaData.serviceName();
 			} else {
-				serviceName = webService.getClass().getSimpleName();
+				serviceName = serviceClass.getSimpleName();
 			}
 			
 			Endpoint.publish( "/" + serviceName, webService );			
@@ -66,8 +72,8 @@ public class AIC1Server {
 	}
 	
 	private void publishRestServices() {
-		for ( AbstractRestService restService : restServices ) {
-			Class<?> serviceClass = restService.getClass();
+		for ( RestService restService : restServices ) {
+			Class<?> serviceClass  = restService.getServiceClass();
 			
 			JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
 			sf.setResourceClasses( serviceClass );
@@ -83,6 +89,8 @@ public class AIC1Server {
 		}
 	}
 	
+	static void print( Object o ) { System.out.println( o ); }
+	
 	//***** PRIVATE PARTS
 	
 	@Autowired
@@ -96,7 +104,7 @@ public class AIC1Server {
 	private List<AbstractWebService>  webServices;
 	@Autowired
 	@Qualifier("CXF")
-	private List<AbstractRestService> restServices;
+	private List<RestService>         restServices;
 	@Autowired
 	@Qualifier("CXF")
 	private Integer                   restServicePort;
