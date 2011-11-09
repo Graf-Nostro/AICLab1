@@ -43,7 +43,6 @@
          </jaxws:inInterceptors>
     </jaxws:endpoint>
 
-<<<<<<< HEAD
     <!--    
          WSS4JInInterceptor for decrypting and validating the signature of the
          SOAP request.
@@ -83,8 +82,7 @@
             </map>
         </constructor-arg>
     </bean>  
-=======
+
 	<!-- enable AspectJ -->
 	<aop:aspectj-autoproxy/>
->>>>>>> 481202369094066ab1eec9857786d6083783d54f
 </beans>
