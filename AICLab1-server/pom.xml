@@ -63,6 +63,12 @@
 			<artifactId>cglib</artifactId>
 			<version>2.2.2</version>
 		</dependency>
+		<!-- WSS4J -->
+		<dependency>
+		   <groupId>org.apache.cxf</groupId>
+		   <artifactId>cxf-rt-ws-security</artifactId>
+		   <version>${cxf.version}</version>
+		</dependency>
 	</dependencies>
 
 	<parent>
