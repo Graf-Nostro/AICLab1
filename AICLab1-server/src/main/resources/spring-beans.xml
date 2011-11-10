@@ -6,6 +6,8 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/aop 
                            http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
@@ -16,8 +18,70 @@
                            http://www.springframework.org/schema/jee 
                            http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
                            http://www.springframework.org/schema/tx 
-                           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+                           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+                           http://www.springframework.org/schema/util 
+        				   http://www.springframework.org/schema/util/spring-util.xsd
+        				   http://cxf.apache.org/jaxws                                     
+        				   http://cxf.apache.org/schemas/jaxws.xsd"
        default-autowire="autodetect">
+     
+     <!-- WS-SECURITY BEAN  -->
+     <!--    
+         TimestampSignEncryptEndpoint endpoint definition    
+         This endpoint is configured to work with public key certificates    
+         on both client and service side.    
+    -->
+    <jaxws:endpoint id="cmsWS"
+       implementor="at.ac.tuwien.infosys.aic11.services.ContractManagementServiceImpl"
+       address="/contractWS"> 
+       <!-- wsdlLocation="WEB-INF/wsdl/DoubleIt.wsdl" -->
+         <jaxws:outInterceptors>
+             <ref bean="TimestampSignEncrypt_Response"/>
+         </jaxws:outInterceptors>
+         <jaxws:inInterceptors>
+             <ref bean="TimestampSignEncrypt_Request"/>
+         </jaxws:inInterceptors>
+    </jaxws:endpoint>
+
+    <!--    
+         WSS4JInInterceptor for decrypting and validating the signature of the
+         SOAP request.
+    -->
+    <bean 
+        id="TimestampSignEncrypt_Request"
+        class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor"
+        >
+        <constructor-arg>
+            <map>
+                <entry key="action" value="Timestamp Signature Encrypt"/>
+                <entry key="signaturePropFile" value="serviceKeystore.properties"/>
+                <entry key="decryptionPropFile" value="serviceKeystore.properties"/>
+                <entry key="passwordCallbackClass" value="at.ac.tuwien.infosys.aic11.services.ServiceKeystorePasswordCallback"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    
+    <!--    
+         WSS4JOutInterceptor for encoding and signing the SOAP response.    
+    -->
+    <bean 
+        id="TimestampSignEncrypt_Response"
+        class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor"
+        >
+        <constructor-arg>
+            <map>
+                <entry key="action" value="Timestamp Signature Encrypt"/>
+                <entry key="user" value="contractmanagementservicekey"/>
+                <entry key="signaturePropFile" value="serviceKeystore.properties"/>
+                <entry key="encryptionPropFile" value="serviceKeystore.properties"/>
+                <entry key="encryptionUser" value="useReqSigCert"/>
+                <entry key="passwordCallbackClass" value="at.ac.tuwien.infosys.aic11.services.ServiceKeystorePasswordCallback"/>
+                <entry key="signatureParts" value="{Element}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp;{Element}{http://schemas.xmlsoap.org/soap/envelope/}Body"/>
+                <entry key="encryptionParts" value="{Element}{http://www.w3.org/2000/09/xmldsig#}Signature;{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body"/>
+                <entry key="encryptionSymAlgorithm" value="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+            </map>
+        </constructor-arg>
+    </bean>  
 
 	<!-- enable AspectJ -->
 	<aop:aspectj-autoproxy/>

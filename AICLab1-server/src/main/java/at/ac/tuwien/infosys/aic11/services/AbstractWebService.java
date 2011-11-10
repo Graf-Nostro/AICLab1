@@ -1,4 +1,11 @@
 package at.ac.tuwien.infosys.aic11.services;
 
-// this interface only helps with type directed dependency injection
-public interface AbstractWebService extends Service {}
+import at.ac.tuwien.infosys.aic11.dto.Addresses;
+import at.ac.tuwien.infosys.aic11.dto.BankTransfer;
+import at.ac.tuwien.infosys.aic11.dto.Cheque;
+
+// this interface only helps with type directed dependecy injection
+public interface AbstractWebService  extends Service {
+
+
+}

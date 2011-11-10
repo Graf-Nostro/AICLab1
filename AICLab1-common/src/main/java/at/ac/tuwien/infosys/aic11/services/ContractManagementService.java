@@ -5,4 +5,6 @@ import javax.jws.WebService;
 @WebService
 public interface ContractManagementService {
 
+	String testEncryption(String s);
+
 }
