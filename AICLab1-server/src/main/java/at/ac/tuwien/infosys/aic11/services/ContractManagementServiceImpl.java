@@ -1,7 +1,6 @@
 package at.ac.tuwien.infosys.aic11.services;
 
 import javax.jws.WebService;
-import org.apache.cxf.interceptor.InInterceptors;
 
 @WebService( serviceName = "contractWS" )
 
