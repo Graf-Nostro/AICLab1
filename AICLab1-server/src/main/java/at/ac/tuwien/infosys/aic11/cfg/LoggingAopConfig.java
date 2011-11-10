@@ -1,15 +1,12 @@
 package at.ac.tuwien.infosys.aic11.cfg;
 
-import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-
-import com.sun.istack.logging.Logger;
 
 @Aspect
 @Component
@@ -25,8 +22,8 @@ public class LoggingAopConfig {
 	
 	@Around("execution(public * *(..)) && within(at.ac.tuwien.infosys.aic11.services..*)")
 	public Object logServiceInvocation( ProceedingJoinPoint joinPoint ) throws Throwable {
-		Logger logger = Logger.getLogger( joinPoint.getTarget().getClass() );
-		
+		Logger logger = Logger.getLogger( joinPoint.getTarget().getClass().getName() );
+
 		// log method invocation
 		String invocation = "Web service was called: " + joinPoint.getSignature().toShortString();
 		Object[] args = joinPoint.getArgs();
@@ -36,13 +33,13 @@ public class LoggingAopConfig {
 				invocation += "    1: " + args[i] + "\n";
 		}
 		
-		logger.log( Level.INFO, invocation );
+		logger.info( invocation );
 		
 		// call method
 		Object retVal = joinPoint.proceed();
 		
 		// log return value
-		logger.log( Level.INFO, "Web service call returned: " + retVal.toString() );
+		logger.info( "Web service call returned: " + retVal.toString() );
 
 		// return return value
 		return retVal;

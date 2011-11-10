@@ -53,4 +53,5 @@ public class CXFConfig {
 	RestService ratingWS() {
 		return new RatingServiceImpl();
 	}
+	
 }

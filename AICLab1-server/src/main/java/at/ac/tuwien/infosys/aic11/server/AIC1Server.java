@@ -1,7 +1,7 @@
 package at.ac.tuwien.infosys.aic11.server;
 
 import java.util.List;
-
+import java.util.logging.LogManager;
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 
@@ -27,6 +27,11 @@ import at.ac.tuwien.infosys.aic11.services.AbstractWebService;
 
 public class AIC1Server {
 	public static void main( String[] args ) throws Exception {
+		// set logger config
+		LogManager.getLogManager().readConfiguration(
+			AIC1Server.class.getClassLoader().getResourceAsStream( "logging.properties" )	
+		);
+			
 		// wire up spring IoC
 		BeanFactory ctx = new AnnotationConfigApplicationContext( 
 			JettyConfig.class,      // settings for our HTTP server
