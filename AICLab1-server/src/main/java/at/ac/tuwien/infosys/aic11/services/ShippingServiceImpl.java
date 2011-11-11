@@ -2,7 +2,7 @@ package at.ac.tuwien.infosys.aic11.services;
 
 import javax.jws.WebService;
 
-@WebService( serviceName="shippingWS" )
+@WebService
 public class ShippingServiceImpl extends AbstractService implements AbstractWebService, ShippingService {
 
 }

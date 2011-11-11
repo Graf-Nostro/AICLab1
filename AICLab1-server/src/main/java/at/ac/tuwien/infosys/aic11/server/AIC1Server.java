@@ -2,7 +2,7 @@ package at.ac.tuwien.infosys.aic11.server;
 
 import java.util.List;
 import java.util.logging.LogManager;
-import javax.jws.WebService;
+
 import javax.xml.ws.Endpoint;
 
 import org.apache.cxf.Bus;
@@ -22,8 +22,9 @@ import at.ac.tuwien.infosys.aic11.cfg.CXFConfig;
 import at.ac.tuwien.infosys.aic11.cfg.JettyConfig;
 import at.ac.tuwien.infosys.aic11.cfg.LoggingAopConfig;
 import at.ac.tuwien.infosys.aic11.cfg.XmlConfig;
-import at.ac.tuwien.infosys.aic11.services.RestService;
 import at.ac.tuwien.infosys.aic11.services.AbstractWebService;
+import at.ac.tuwien.infosys.aic11.services.RestService;
+import at.ac.tuwien.infosys.aic11.services.Services;
 
 public class AIC1Server {
 	public static void main( String[] args ) throws Exception {
@@ -62,15 +63,7 @@ public class AIC1Server {
 		for ( AbstractWebService webService : webServices ) {
 			Class<?> serviceClass = webService.getServiceClass();
 			
-			WebService metaData = serviceClass.getAnnotation( WebService.class );
-			
-			String serviceName;
-			
-			if ( metaData != null && metaData.serviceName() != null ) {
-				serviceName = metaData.serviceName();
-			} else {
-				serviceName = serviceClass.getSimpleName();
-			}
+			String serviceName = Services.getServiceName( serviceClass );
 			
 			Endpoint.publish( "/" + serviceName, webService );			
 		}

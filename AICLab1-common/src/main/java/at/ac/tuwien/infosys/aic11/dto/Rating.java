@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="rating")
-public class Rating {
+public class Rating extends DTO {
 	@XmlElement(required=true)
 	public Customer       getCustomer() { return customer; }
 	@XmlElement(required=true)

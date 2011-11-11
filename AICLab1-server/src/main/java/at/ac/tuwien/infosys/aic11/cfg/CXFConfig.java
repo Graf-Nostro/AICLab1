@@ -23,8 +23,8 @@ public class CXFConfig {
 	
 	@Bean
 	@Qualifier("CXF")
-	Integer restServicePort( Integer httpPort ) {
-		return httpPort + 1;
+	Integer restServicePort( Config cfg ) {
+		return cfg.getInt( "http.server.port.rs" );
 	}
 	
 	@Bean

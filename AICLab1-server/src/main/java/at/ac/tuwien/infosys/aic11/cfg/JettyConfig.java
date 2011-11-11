@@ -25,36 +25,30 @@ public class JettyConfig {
 	@Bean
 	@Qualifier("Jetty")
 	Integer httpPort( Config cfg ) {
-		return cfg.getInt( "http.server.port" );
+		return cfg.getInt( "http.server.port.ws" );
 	}
 	
 	@Bean
 	@Qualifier("Jetty")
-	Handler requestHandler( ServletHolder servlet, String servletPath ) {
+	Handler requestHandler( ServletHolder servlet ) {
 		// the main handler
 		ContextHandlerCollection contexts = new ContextHandlerCollection();
 
 		// create servlet context 
 		ServletContextHandler servlets = new ServletContextHandler( contexts, "/" );		
-		servlets.addServlet( servlet, "/" + servletPath + "/*");
+		servlets.addServlet( servlet, "/*");
 		
 		return contexts;
 	}
 	
 	@Bean
 	@Qualifier("Jetty")
-	ServletHolder servlet( CXFNonSpringServlet cxf, String servletPath ) {
+	ServletHolder servlet( CXFNonSpringServlet cxf ) {
 		ServletHolder servlet = new ServletHolder(cxf);
-		servlet.setName( servletPath );
-		servlet.setForcedPath( servletPath );
+		servlet.setName( "CXF" );
+//		servlet.setForcedPath( servletPath );
 		
 		return servlet;
-	}
-	
-	@Bean
-	@Qualifier("Jetty")
-	String servletPath( Config cfg ) {
-		return cfg.get("http.servlet.path");
 	}
 	
 	// holds config common to all lab1 subprojects

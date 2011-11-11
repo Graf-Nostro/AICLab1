@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="money")
-public class Money {
+public class Money extends DTO {
 	public Money() {}
 	
 	public Money( String currencyCode, long amount ) {

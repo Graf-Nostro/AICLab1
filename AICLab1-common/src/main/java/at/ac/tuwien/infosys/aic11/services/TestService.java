@@ -16,7 +16,7 @@ import at.ac.tuwien.infosys.aic11.dto.Offer;
 import at.ac.tuwien.infosys.aic11.dto.Rating;
 import at.ac.tuwien.infosys.aic11.dto.Warrantor;
 
-@WebService
+@WebService(serviceName="testWS")
 public interface TestService {
 	String foo();
 	String bar( String str );

@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="offer")
-public class Offer {
+public class Offer extends DTO {
 	// members
 	@XmlAttribute(name="offer_id")
 	public long getOfferId()    { return offerId;  }
