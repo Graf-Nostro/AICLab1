@@ -23,7 +23,7 @@ import at.ac.tuwien.infosys.aic11.cfg.JettyConfig;
 import at.ac.tuwien.infosys.aic11.cfg.LoggingAopConfig;
 import at.ac.tuwien.infosys.aic11.cfg.XmlConfig;
 import at.ac.tuwien.infosys.aic11.services.AbstractWebService;
-import at.ac.tuwien.infosys.aic11.services.RestService;
+import at.ac.tuwien.infosys.aic11.services.AbstractRestService;
 import at.ac.tuwien.infosys.aic11.services.Services;
 
 public class AIC1Server {
@@ -51,9 +51,10 @@ public class AIC1Server {
 		httpServer.start();
 		
 		publishWebServices();
-		publishRestServices();
+		 org.apache.cxf.endpoint.Server restServer = publishRestServices();
 		
 		httpServer.join();
+		restServer.destroy();
 	}	
 
 	private void publishWebServices() {
@@ -69,11 +70,12 @@ public class AIC1Server {
 		}
 	}
 	
-	private void publishRestServices() {
-		for ( RestService restService : restServices ) {
+	private org.apache.cxf.endpoint.Server publishRestServices() {
+		JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
+
+		for ( AbstractRestService restService : restServices ) {
 			Class<?> serviceClass  = restService.getServiceClass();
 			
-			JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
 			sf.setResourceClasses( serviceClass );
 			sf.setResourceProvider( serviceClass, new SingletonResourceProvider( restService ) );
 			sf.setAddress( "http://localhost:" + restServicePort );
@@ -83,8 +85,9 @@ public class AIC1Server {
 			factory.setBus(sf.getBus());
 			manager.registerBindingFactory(JAXRSBindingFactory.JAXRS_BINDING_ID, factory);
 
-			sf.create();
 		}
+
+		return sf.create();
 	}
 	
 	static void print( Object o ) { System.out.println( o ); }
@@ -102,7 +105,7 @@ public class AIC1Server {
 	private List<AbstractWebService>  webServices;
 	@Autowired
 	@Qualifier("CXF")
-	private List<RestService>         restServices;
+	private List<AbstractRestService> restServices;
 	@Autowired
 	@Qualifier("CXF")
 	private Integer                   restServicePort;

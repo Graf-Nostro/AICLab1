@@ -135,6 +135,9 @@ public abstract class Util {
 		return new Filter();
 	}
 	
+	public static <E> String join( String separator, E... src ) {
+		return join( separator, asIterable( src ) );
+	}
 	public static <E> String join( String separator, Iterable<E> src ) {
 		Iterator<E> it = src.iterator();
 		
@@ -150,6 +153,39 @@ public abstract class Util {
 		}
 		
 		return dst.toString();
+	}
+	
+	public static <E> Iterable<E> asIterable( final E... es ) {
+		return new Iterable<E>() {
+			@Override
+			public Iterator<E> iterator() {
+				return asIterator( es );
+			}
+		};
+	}
+	public static <E> Iterator<E> asIterator( final E... es ) {
+		return new Iterator<E>() {
+			int pos = 0;
+			
+			@Override
+			public boolean hasNext() {
+				return pos < es.length;
+			}
+
+			@Override
+			public E next() {
+				try {
+					return es[pos++];
+				} catch ( ArrayIndexOutOfBoundsException e ) {
+					throw new NoSuchElementException( e.getLocalizedMessage() );
+				}
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+		};
 	}
 	
 	private Util() {}

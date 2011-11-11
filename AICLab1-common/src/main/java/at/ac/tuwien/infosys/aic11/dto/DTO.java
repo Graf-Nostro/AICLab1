@@ -142,7 +142,7 @@ abstract class DTO {
 					return ( DTO.class.isAssignableFrom( f.getType() ) );
 				}
 			},
-			list( getClass().getFields() )
+			list( getClass().getDeclaredFields() )
 		);
 	}
 	
