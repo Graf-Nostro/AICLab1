@@ -17,7 +17,6 @@ import org.apache.cxf.message.Message;
 import at.ac.tuwien.infosys.aic11.cfg.Config;
 import at.ac.tuwien.infosys.aic11.services.Services;
 import at.ac.tuwien.infosys.aic11.util.Exceptions;
-import at.ac.tuwien.infosys.aic11.util.Function;
 import at.ac.tuwien.infosys.aic11.util.ReflectionUtil;
 import at.ac.tuwien.infosys.aic11.util.Util;
 
@@ -34,20 +33,7 @@ public class AIC1Client {
 		Client client = dcf.createClient( new File( "../disbursement-service-cheque.wsdl" ).toURI().toURL() );
 		
 //		client.getRequestContext().put("schema-validation-enabled", "true"); 
-		
-		
-		
-		Function<String,String> dtoClassMapper = new Function<String,String>() {
-			@Override
-			public String apply( String className ) {
-				if ( className.startsWith( "at.ac.tuwien.infosys.aic11.dto." ) ) {
-					return className.replace( "at.ac.tuwien.infosys.aic11.dto.", "at.ac.tuwien.infosys.aic11.services." );
-				}
 				
-				return null;
-			}
-		};
-		
 		Object cheque   = ReflectionUtil.makeInstance( "at.ac.tuwien.infosys.aic11.services.Cheque" )
                                         .setProperty( "name", "Fader A. Vader" )
                                         .build();
