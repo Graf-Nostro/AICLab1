@@ -4,9 +4,11 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement( name = "credit_request" )
+import at.ac.tuwien.infosys.aic11.dto.Duration;
+
+@XmlType( name = "credit_request" )
 public class CreditRequest extends DTO {
 	public CreditRequest() {}
 	

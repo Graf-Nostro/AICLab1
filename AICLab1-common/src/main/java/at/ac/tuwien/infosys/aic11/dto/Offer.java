@@ -2,9 +2,11 @@ package at.ac.tuwien.infosys.aic11.dto;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name="offer")
+
+
+@XmlType(name="offer")
 public class Offer extends DTO {
 	// members
 	@XmlAttribute(name="offer_id")

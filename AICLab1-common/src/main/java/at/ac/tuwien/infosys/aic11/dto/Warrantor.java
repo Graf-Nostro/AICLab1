@@ -4,9 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement( name="warrantor" )
+
+
+@XmlType( name="warrantor" )
 public class Warrantor extends DTO {
 	public Warrantor() {
 		this( new HashSet<CreditRequest>() );

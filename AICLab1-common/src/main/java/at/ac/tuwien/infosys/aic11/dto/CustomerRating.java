@@ -1,8 +1,8 @@
 package at.ac.tuwien.infosys.aic11.dto;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement
+@XmlType
 public enum CustomerRating {
 	AAA, AAPlus, AA, AAMinus, APlus, A, AMinus, Defaulting;
 }

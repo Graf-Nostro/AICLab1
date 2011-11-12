@@ -6,10 +6,13 @@ import javax.jws.WebService;
 public class ContractManagementServiceImpl extends AbstractService implements ContractManagementService, 
                                                                               AbstractWebService {
 	
-	
 	@Override
 	public String testEncryption(String s) {
 		return "This is a test, if you can read this, this is bad, " + s + "!";
 	}
 
+	@Override
+	public String testEncryption2() {
+		return "This is a test, if you can read this, this is bad!";
+	}
 }

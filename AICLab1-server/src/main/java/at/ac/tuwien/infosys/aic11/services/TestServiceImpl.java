@@ -2,16 +2,16 @@ package at.ac.tuwien.infosys.aic11.services;
 
 import javax.jws.WebService;
 
-import at.ac.tuwien.infosys.aic11.dto.Addresses;
+import at.ac.tuwien.infosys.aic11.dto.Address;
 import at.ac.tuwien.infosys.aic11.dto.BankTransfer;
 import at.ac.tuwien.infosys.aic11.dto.Cheque;
 import at.ac.tuwien.infosys.aic11.dto.CreditRequest;
 import at.ac.tuwien.infosys.aic11.dto.Customer;
 import at.ac.tuwien.infosys.aic11.dto.CustomerRating;
 import at.ac.tuwien.infosys.aic11.dto.DisbursementPreference;
+import at.ac.tuwien.infosys.aic11.dto.Money;
 import at.ac.tuwien.infosys.aic11.dto.Duration;
 import at.ac.tuwien.infosys.aic11.dto.InterestRate;
-import at.ac.tuwien.infosys.aic11.dto.Money;
 import at.ac.tuwien.infosys.aic11.dto.Offer;
 import at.ac.tuwien.infosys.aic11.dto.Rating;
 import at.ac.tuwien.infosys.aic11.dto.Warrantor;
@@ -29,32 +29,34 @@ public class TestServiceImpl extends AbstractService implements AbstractWebServi
 	}
 
 	@Override
-	public Addresses getAddresses() {
-		// TODO Auto-generated method stub
-		return null;
+	public Address getAddresses() {
+		return new Address();
 	}
 
 	@Override
 	public BankTransfer getBankTransfer() {
-		// TODO Auto-generated method stub
-		return null;
+		return new BankTransfer();
 	}
 
 	@Override
 	public Cheque getCheque() {
-		return new Cheque("test");
+		Cheque c = new Cheque();
+		c.setName( "foo" );
+		
+		return c;
 	}
 
 	@Override
 	public CreditRequest getCreditRequest() {
-		// TODO Auto-generated method stub
-		return null;
+		return new CreditRequest();
 	}
 
 	@Override
 	public Customer getCustomer() {
-		// TODO Auto-generated method stub
-		return null;
+		Customer c = new Customer();
+		c.setAddress( getAddresses() );
+		c.setDisbursementPreference( new Cheque() );
+		return c;
 	}
 
 	@Override
@@ -65,8 +67,7 @@ public class TestServiceImpl extends AbstractService implements AbstractWebServi
 
 	@Override
 	public DisbursementPreference getDisbursementPreference() {
-		// TODO Auto-generated method stub
-		return null;
+		return getCheque();
 	}
 
 	@Override
@@ -83,8 +84,7 @@ public class TestServiceImpl extends AbstractService implements AbstractWebServi
 
 	@Override
 	public Money getMoney() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Money( "EUR", 5000 );
 	}
 
 	@Override
@@ -95,8 +95,7 @@ public class TestServiceImpl extends AbstractService implements AbstractWebServi
 
 	@Override
 	public Rating getRating() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Rating( getCustomer(), getCustomerRating() );
 	}
 	@Override
 	public Warrantor getWarrantor() {

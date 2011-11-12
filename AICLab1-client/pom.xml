@@ -36,6 +36,33 @@
 			<artifactId>cxf-bundle-jaxrs</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
+		<!-- Apache Wicket for the WebGUI -->
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-core</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+				<!-- Jetty -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-http</artifactId>
+			<version>8.0.4.v20111024</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-io</artifactId>
+	    	<version>8.0.4.v20111024</version>
+		</dependency>
+		<dependency>
+   			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>8.0.4.v20111024</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.eclipse.jetty</groupId>
+    		<artifactId>jetty-servlet</artifactId>
+    		<version>8.0.4.v20111024</version>
+		</dependency>
 	</dependencies>
 
 	<parent>
@@ -44,52 +71,5 @@
 		<version>1.0</version>
     	<relativePath>../</relativePath>
 	</parent>
-	
-	<build>
-		<plugins>
-			<!-- Generate Java classes from WSDL during build -->
-			<plugin>
-				<groupId>org.apache.cxf</groupId>
-					<artifactId>cxf-codegen-plugin</artifactId>
-					<version>${cxf.version}</version>
-					<executions>
-						<execution>
-							<id>generate-sources</id>
-							<phase>generate-sources</phase>
-							<configuration>
-								<sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
-								<wsdlOptions>
-									<wsdlOption>
-										<wsdl>${basedir}/src/main/wsdl/registry_service.wsdl</wsdl>
-									</wsdlOption>
-								</wsdlOptions>
-							</configuration>
-							<goals>
-								<goal>wsdl2java</goal>
-							</goals>
-						</execution>
-					</executions>
-			</plugin>
-			<!-- Add generated sources - avoids having to copy generated sources to build location -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>${basedir}/target/generated/src/main/java</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>
 

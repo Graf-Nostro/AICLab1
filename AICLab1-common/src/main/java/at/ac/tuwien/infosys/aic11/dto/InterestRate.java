@@ -1,8 +1,10 @@
 package at.ac.tuwien.infosys.aic11.dto;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name="interest_rate")
+
+
+@XmlType(name="interest_rate")
 public class InterestRate extends DTO {
 	public double getRate() { return rate; }
 

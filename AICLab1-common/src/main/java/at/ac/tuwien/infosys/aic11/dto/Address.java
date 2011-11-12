@@ -2,10 +2,10 @@ package at.ac.tuwien.infosys.aic11.dto;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement( name="addresses" )
-public class Addresses extends DTO {
+@XmlType( name="address" )
+public class Address extends DTO {
 	@XmlAttribute
 	public String getId()      { return id;      }
 	public String getStreet()  { return street;  }

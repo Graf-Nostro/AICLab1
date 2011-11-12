@@ -7,4 +7,6 @@ public interface ContractManagementService {
 
 	String testEncryption(String s);
 
+	String testEncryption2();
+
 }

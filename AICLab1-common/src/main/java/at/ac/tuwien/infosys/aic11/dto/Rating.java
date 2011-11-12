@@ -1,9 +1,11 @@
 package at.ac.tuwien.infosys.aic11.dto;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name="rating")
+
+
+@XmlType(name="rating")
 public class Rating extends DTO {
 	public Rating() {/**/}
 	

@@ -4,6 +4,7 @@ import at.ac.tuwien.infosys.aic11.dto.Customer;
 import at.ac.tuwien.infosys.aic11.dto.CustomerRating;
 import at.ac.tuwien.infosys.aic11.dto.Rating;
 
+
 public class RatingServiceImpl extends AbstractService implements AbstractRestService, RatingService {
 	@Override
 	public CustomerRating getRatingForCustomerId( long id ) {

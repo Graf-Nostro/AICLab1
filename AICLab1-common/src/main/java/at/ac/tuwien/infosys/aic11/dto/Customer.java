@@ -5,10 +5,32 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement( name="customer" )
+
+
+
+@XmlType( name="customer" )
 public class Customer extends Warrantor {
+	public Customer() {/**/}
+		
+	public Customer( long customerId, String firstName, String middleName,
+			String lastName, BigDecimal openBalance, Address address,
+			DisbursementPreference disbursementPreference, Rating rating,
+			Set<CreditRequest> creditRequests ) {
+		super();
+		this.customerId = customerId;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.openBalance = openBalance;
+		this.address = address;
+		this.disbursementPreference = disbursementPreference;
+		this.rating = rating;
+		this.creditRequests = creditRequests;
+	}
+
+
 	// members
 	@XmlAttribute(name="customer_id")
 	public long                             getCustomerId()   { return customerId;             }
@@ -29,7 +51,7 @@ public class Customer extends Warrantor {
 	
 	// relations
 	@XmlElement(required=true)
-	public Addresses                        getAddress()                { return address;                }
+	public Address                        getAddress()                { return address;                }
 	@XmlElement(name="disbursement_preference",required=true)
 	public DisbursementPreference           getDisbursementPreference() { return disbursementPreference; }
 	@XmlElement(nillable=true)
@@ -37,7 +59,7 @@ public class Customer extends Warrantor {
 	@XmlElement(name="credit_requests", nillable=true)
 	public Set<CreditRequest>               getCreditRequests()         { return creditRequests;         }
 	
-	public void setAddress( Addresses address )                        { this.address = address;               }
+	public void setAddress( Address address )                        { this.address = address;               }
 	public void setDisbursementPreference( DisbursementPreference d )  { this.disbursementPreference = d;      }
 	public void setRating( Rating rating )                             { this.rating = rating;                 }
 	public void setCreditRequests( Set<CreditRequest> creditRequests ) { this.creditRequests = creditRequests; }
@@ -52,7 +74,7 @@ public class Customer extends Warrantor {
 	private BigDecimal             openBalance;
 	
 	// relations
-	private Addresses              address;
+	private Address              address;
 	private DisbursementPreference disbursementPreference;
 	private Rating                 rating;
 	private Set<CreditRequest>     creditRequests;	

@@ -9,6 +9,10 @@
 	<artifactId>AICLab1-common</artifactId>
 	<packaging>jar</packaging>
 
+	<properties>
+		<cxf.version>2.5.0</cxf.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
@@ -23,5 +27,73 @@
 		<version>1.0</version>
     	<relativePath>../</relativePath>
 	</parent>
+
+	<build>
+		<plugins>
+<!--
+			<!- - Generate Java classes from WSDL during build - ->
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+					<artifactId>cxf-codegen-plugin</artifactId>
+					<version>${cxf.version}</version>
+					<executions>
+						<execution>
+							<id>generate-sources</id>
+							<phase>generate-sources</phase>
+							<configuration>
+								<sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
+								<wsdlOptions>
+									<wsdlOption>
+										<wsdl>${basedir}/src/main/wsdl/registry_service.wsdl</wsdl>
+									</wsdlOption>
+								</wsdlOptions>
+							</configuration>
+							<goals>
+								<goal>wsdl2java</goal>
+							</goals>
+						</execution>
+					</executions>
+			</plugin>
+			<!- - Add generated sources - avoids having to copy generated sources to build location - ->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/target/generated/src/main/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+-->
+		<!-- Add generated sources - avoids having to copy generated sources to build location -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/src/generated/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
 

@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import at.ac.tuwien.infosys.aic11.dto.CustomerRating;
 import at.ac.tuwien.infosys.aic11.dto.Rating;
 
+
 public interface RatingService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

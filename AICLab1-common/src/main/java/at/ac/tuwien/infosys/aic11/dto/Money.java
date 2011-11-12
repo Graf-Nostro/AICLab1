@@ -1,15 +1,17 @@
 package at.ac.tuwien.infosys.aic11.dto;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name="money")
+
+
+@XmlType(name="money", namespace="http://http://services.aic11.infosys.tuwien.ac.at/")
 public class Money extends DTO {
 	public Money() {}
 	
 	public Money( String currencyCode, long amount ) {
 		this.currencyCode = currencyCode;
-		this.amount = amount;
+		this.amount       = amount;
 	}
 
 	@XmlElement(name="currency_code")
