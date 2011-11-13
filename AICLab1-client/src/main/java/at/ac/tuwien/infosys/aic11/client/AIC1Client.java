@@ -3,6 +3,8 @@ package at.ac.tuwien.infosys.aic11.client;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.endpoint.ClientCallback;
@@ -13,22 +15,61 @@ import org.apache.cxf.jaxrs.client.JAXRSClientFactoryBean;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 import org.apache.cxf.message.Message;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 
 import at.ac.tuwien.infosys.aic11.cfg.Config;
+import at.ac.tuwien.infosys.aic11.services.ContractManagementService;
 import at.ac.tuwien.infosys.aic11.services.Services;
 import at.ac.tuwien.infosys.aic11.util.Exceptions;
 import at.ac.tuwien.infosys.aic11.util.ReflectionUtil;
 import at.ac.tuwien.infosys.aic11.util.Util;
 
+import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
+import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
+import org.apache.ws.security.WSConstants;
+import org.apache.ws.security.handler.WSHandlerConstants;
+
 public class AIC1Client {
 	public static void main(String[] args) throws Exception {
+		/** WS SECURITY */
+		/**
+		// Configure Spring
+		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("client-context.xml"));
+		ContractManagementService port = (ContractManagementService) factory.getBean("clientkey");
+		
+		// Configure Interceptors outgoing properties
+				
+		org.apache.cxf.endpoint.Client clientEndpoint = ClientProxy.getClient(port);
+		org.apache.cxf.endpoint.Endpoint cxfEndpoint = clientEndpoint.getEndpoint();
+		
+		Map<String,Object> inProps= new HashMap<String,Object>();
+		// how to configure the properties is outlined below;
+
+		WSS4JInInterceptor wssIn = new WSS4JInInterceptor(inProps);
+		cxfEndpoint.getInInterceptors().add(wssIn);
+
+		Map<String,Object> outProps = new HashMap<String,Object>();
+	    // how to configure the properties is outlined below;
+
+		WSS4JOutInterceptor wssOut = new WSS4JOutInterceptor(outProps);
+		cxfEndpoint.getOutInterceptors().add(wssOut);
+		
+		outProps.put(WSHandlerConstants.ACTION, "Signature Encryption");
+		outProps.put(WSHandlerConstants.USER, "clientkey");
+		outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, 
+		    ClientKeystorePasswordCallback.class.getName());
+		outProps.put(WSHandlerConstants.SIG_PROP_FILE, "clientKeystore.properties");
+		*/
+		
 //		TestService               testWS    = getWebService( TestService.class );
 //		RatingService             ratings   = getRestService( RatingService.class );
 //		IRegistryService          registry  = getWebService( IRegistryService.class, "http://vc.infosys.tuwien.ac.at:8092/registry" );
 //		ContractManagementService contracts = getWebService( ContractManagementService.class );
 		
 		JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
-
+		
 //		Client client = dcf.createClient( registry.query( new Cheque() ).getLocation() + "?wsdl" );
 		Client client = dcf.createClient( new File( "../disbursement-service-cheque.wsdl" ).toURI().toURL() );
 		

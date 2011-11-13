@@ -16,7 +16,7 @@ public class ServiceKeystorePasswordCallback implements CallbackHandler {
         new HashMap<String, String>();
     
     public ServiceKeystorePasswordCallback() {
-        passwords.put("contractmanagementservicekey", "skpass");
+        passwords.put("contractmanagementservicekey", "sspass");
     }
 
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {

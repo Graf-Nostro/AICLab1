@@ -1,6 +1,5 @@
 package at.ac.tuwien.infosys.aic11.client;
 
-/**
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,4 +30,3 @@ public class ClientKeystorePasswordCallback implements CallbackHandler {
         }
     }   
 }
-**/
