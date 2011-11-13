@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
     Cheque.class,
     BankTransfer.class
 })
-public abstract class DisbursementPreference {
+public abstract class DisbursementPreference extends DTO {
 
 
 }

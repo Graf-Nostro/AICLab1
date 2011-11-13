@@ -5,6 +5,7 @@ import static at.ac.tuwien.infosys.aic11.util.Util.filter;
 import static at.ac.tuwien.infosys.aic11.util.Util.join;
 import static at.ac.tuwien.infosys.aic11.util.Util.map;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import at.ac.tuwien.infosys.aic11.util.Function;
 
 // this class just helps with nice toString methods
-abstract class DTO {
+abstract class DTO implements Serializable {
 	@SuppressWarnings("unchecked")
 	public final String toString() {
 		return mkStr( concat( getMembers(), getRelations() ) );
@@ -120,7 +121,7 @@ abstract class DTO {
 	/**
 	 *  members that will always be included in the result string
 	 */
-	private final Iterable<Field> getMembers() {
+	public final Iterable<Field> getMembers() {
 		return filter(
 			new Function<Boolean,Field>() {
 				@Override
@@ -134,7 +135,7 @@ abstract class DTO {
 	/***
 	 *  members that will be omitted if necessary to avoid cycles
 	 */
-	private final Iterable<Field> getRelations() {
+	public final Iterable<Field> getRelations() {
 		return filter(
 			new Function<Boolean,Field>() {
 				@Override

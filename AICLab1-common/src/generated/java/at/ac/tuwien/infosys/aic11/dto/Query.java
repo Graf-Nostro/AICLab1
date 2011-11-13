@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "query", propOrder = {
     "arg0"
 })
-public class Query {
+public class Query extends DTO {
 
     protected DisbursementPreference arg0;
 
