@@ -1,32 +1,23 @@
 package at.ac.tuwien.infosys.aic11.services;
 
-import at.ac.tuwien.infosys.aic11.dto.Customer;
-import at.ac.tuwien.infosys.aic11.dto.CustomerRating;
+import java.util.List;
+
 import at.ac.tuwien.infosys.aic11.dto.Rating;
+import at.ac.tuwien.infosys.aic11.mock.RatingServiceMock;
 
 
 public class RatingServiceImpl extends AbstractService implements AbstractRestService, RatingService {
+	private RatingServiceMock mock = new RatingServiceMock();
+	
 	@Override
-	public CustomerRating getRatingForCustomerId( long id ) {
-		return CustomerRating.AAA;
+	public Rating getRatingForCustomerId(long id) {
+		//invoke legacy mock
+		return mock.getCustomerRating(id);
 	}
 	
 	@Override
-	public String sayHello() {
-		return "<html> " + 
-		         "<title>" + 
-		            "Hello World" + 
-		         "</title>" +
-		         "<body>" +
-		           "<h1>" + 
-		             "Hello World" + 
-		           "</h1>" + 
-		         "</body>" +
-		       "</html> ";
-	}
-
-	@Override
-	public Rating getRatingForCustomerId_plainText( long id ) {
-		return new Rating( new Customer(), CustomerRating.AAA );
+	public List<Rating> getWarrontorRatingForCustomerId(long id) {
+		//invoke legacy mock
+		return mock.getWarrontorRatingForCustomerId(id);
 	}
 }
