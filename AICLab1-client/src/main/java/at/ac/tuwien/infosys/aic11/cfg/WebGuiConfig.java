@@ -1,5 +1,7 @@
 package at.ac.tuwien.infosys.aic11.cfg;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,18 +16,14 @@ public class WebGuiConfig {
 	@Bean
 	RatingService ratings() {
 		return new RatingService() {
-			@Override
-			public String sayHello() {
-				return "hello";
-			}
-			@Override
-			public Rating getRatingForCustomerId_plainText( long id ) {
-				return new Rating();
-			}
 			
 			@Override
 			public Rating getRatingForCustomerId( long id ) {
-				return new Rating(null, CustomerRating.A);
+				return new Rating( null, CustomerRating.AAA );
+			}
+			@Override
+			public List<at.ac.tuwien.infosys.aic11.dto.Rating> getWarrontorRatingForCustomerId( long id ) {
+				return null;
 			}
 		};
 	}

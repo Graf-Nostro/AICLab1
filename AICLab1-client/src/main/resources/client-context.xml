@@ -7,9 +7,12 @@
           http://cxf.apache.org/jaxws
           http://cxf.apache.org/schemas/jaxws.xsd">
 
+   <bean id="clientkey" class="at.ac.tuwien.infosys.aic11.client.AIC1Client" 
+        factory-bean="clientFactory" factory-method="create"/>
+        
    <bean id="clientFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
      <property name="serviceClass" value="at.ac.tuwien.infosys.aic11.client.AIC1Client"/>
-     <property name="address" value="http://localhost:8080/cxf"/>
+     <!-- <property name="address" value="http://localhost:8080/cxf"/>  -->
        <property name="inInterceptors">
          <list>
             <ref bean="TimestampSignEncrypt_Response"/>

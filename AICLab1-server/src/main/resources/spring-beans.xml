@@ -24,17 +24,21 @@
         				   http://cxf.apache.org/jaxws                                     
         				   http://cxf.apache.org/schemas/jaxws.xsd"
        default-autowire="autodetect">
-     
+       
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
      <!-- WS-SECURITY BEAN  -->
      <!--    
          TimestampSignEncryptEndpoint endpoint definition    
          This endpoint is configured to work with public key certificates    
          on both client and service side.    
     -->
+    
     <jaxws:endpoint id="cmsWS"
        implementor="at.ac.tuwien.infosys.aic11.services.ContractManagementServiceImpl"
        address="/contractWS"> 
-       <!-- wsdlLocation="WEB-INF/wsdl/DoubleIt.wsdl" -->
+       <!-- wsdlLocation="WEB-INF/wsdl/cms.wsdl" -->
          <jaxws:outInterceptors>
              <ref bean="TimestampSignEncrypt_Response"/>
          </jaxws:outInterceptors>
@@ -42,7 +46,7 @@
              <ref bean="TimestampSignEncrypt_Request"/>
          </jaxws:inInterceptors>
     </jaxws:endpoint>
-
+    
     <!--    
          WSS4JInInterceptor for decrypting and validating the signature of the
          SOAP request.
