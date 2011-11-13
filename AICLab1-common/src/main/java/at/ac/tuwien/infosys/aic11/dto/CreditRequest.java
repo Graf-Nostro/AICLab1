@@ -1,7 +1,7 @@
 package at.ac.tuwien.infosys.aic11.dto;
 
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -10,17 +10,14 @@ import at.ac.tuwien.infosys.aic11.dto.Duration;
 
 @XmlType( name = "credit_request" )
 public class CreditRequest extends DTO {
-	public CreditRequest() {}
+	public CreditRequest() {
+		this( null );
+	}
 	
-	public CreditRequest( Money money, Duration duration, Offer offer, 
-			Set<Warrantor> warrantors, long requestId, String reason ) {
-		super();
-		this.money = money;
-		this.duration = duration;
-		this.offer = offer;
-		this.warrantors = warrantors;
-		this.requestId = requestId;
-		this.reason = reason;
+	public CreditRequest( Customer c ) {
+		this.customer = c;
+		
+		warrantors = new ArrayList<Warrantor>();			
 	}
 
 	// members
@@ -33,22 +30,22 @@ public class CreditRequest extends DTO {
 
 	// relations
 	@XmlElement(required=true)
-	public Money          getMoney()      { return money;      }
+	public Money          getMoney()       { return money;      }
 	@XmlElement(required=true)
-	public Duration       getDuration()   { return duration;   }
+	public Duration       getDuration()    { return duration;   }
 	@XmlElement(nillable=true)
-	public Offer          getOffer()      { return offer;      }
+	public Offer          getOffer()       { return offer;      }
 	@XmlElement(nillable=true)
-	public Set<Warrantor> getWarrantors() { return warrantors; }
+	public List<Warrantor> getWarrantors() { return warrantors; }
 	@XmlElement(required=true)
-	public Set<Customer>  getCustomers()  { return customers;  }
+	public Customer        getCustomer()   { return customer;  }
 
 
-	public void setMoney(Money money)                    { this.money = money;           }
-	public void setDuration(Duration duration)           { this.duration = duration;     }
-	public void setOffer(Offer offer)                    { this.offer = offer;           }
-	public void setWarrantors(Set<Warrantor> warrantors) { this.warrantors = warrantors; }
-	public void setCustomers( Set<Customer> customers )  { this.customers = customers;   }
+	public void setMoney(Money money)                     { this.money = money;           }
+	public void setDuration(Duration duration)            { this.duration = duration;     }
+	public void setOffer(Offer offer)                     { this.offer = offer;           }
+	public void setWarrantors(List<Warrantor> warrantors) { this.warrantors = warrantors; }
+	public void setCustomer( Customer customer )          { this.customer = customer;   }
 	//***** PRIVATE PARTS
 
 	// members
@@ -56,9 +53,9 @@ public class CreditRequest extends DTO {
 	private String reason;
 
 	// relations
-	private Money          money;
-	private Duration       duration;
-	private Offer          offer;
-	private Set<Warrantor> warrantors;
-	private Set<Customer>  customers;
+	private Customer        customer;
+	private List<Warrantor> warrantors;
+	private Money           money;
+	private Duration        duration;
+	private Offer           offer;
 }

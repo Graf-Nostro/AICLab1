@@ -7,8 +7,8 @@ import at.ac.tuwien.infosys.aic11.dto.Rating;
 
 public class RatingServiceImpl extends AbstractService implements AbstractRestService, RatingService {
 	@Override
-	public CustomerRating getRatingForCustomerId( long id ) {
-		return CustomerRating.AAA;
+	public Rating getRatingForCustomerId( long id ) {
+		return new Rating(null,CustomerRating.AAA);
 	}
 	
 	@Override

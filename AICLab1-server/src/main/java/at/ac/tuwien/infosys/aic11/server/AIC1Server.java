@@ -82,7 +82,6 @@ public class AIC1Server {
 			JAXRSBindingFactory factory = new JAXRSBindingFactory();
 			factory.setBus(sf.getBus());
 			manager.registerBindingFactory(JAXRSBindingFactory.JAXRS_BINDING_ID, factory);
-
 		}
 
 		return sf.create();

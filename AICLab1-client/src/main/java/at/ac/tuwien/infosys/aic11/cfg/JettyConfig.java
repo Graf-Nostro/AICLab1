@@ -4,6 +4,7 @@ import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,7 +28,7 @@ public class JettyConfig {
 	
 	@Bean
 	@Qualifier("Jetty")
-	Handler requestHandler() {
+	Handler requestHandler( ApplicationContext springCtx ) {
 		WebAppContext ctx = new WebAppContext();
 		
 		ctx.setDescriptor( "target/classes/WEB-INF/web.xml" );

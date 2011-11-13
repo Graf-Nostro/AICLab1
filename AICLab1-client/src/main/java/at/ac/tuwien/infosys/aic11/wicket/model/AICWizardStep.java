@@ -1,39 +1,41 @@
 package at.ac.tuwien.infosys.aic11.wicket.model;
 
-import org.apache.wicket.extensions.wizard.dynamic.DynamicWizardStep;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.html.form.FormComponentPanel;
 
-public abstract class AICWizardStep<T> extends DynamicWizardStep {
-	public AICWizardStep( AICWizardStep<?> previous, String title ) {
-		this( previous, Model.of( title ) );
+import at.ac.tuwien.infosys.aic11.dto.CreditRequest;
+
+public abstract class AICWizardStep extends FormComponentPanel<CreditRequest> {
+	public AICWizardStep() {
+		this( null );
 	}
-	public AICWizardStep( AICWizardStep<?> previous, IModel<String> title ) {
-		this( previous, title, (IModel<T>) null );
-	}
-	public AICWizardStep( AICWizardStep<?> previous, String title, IModel<T> model ) {
-		this( previous, Model.of( title ), null, model );
-	}
-	public AICWizardStep( AICWizardStep<?> previous, IModel<String> title, IModel<T> model ) {
-		this( previous, title, null, model );
-	}
-	public AICWizardStep( AICWizardStep<?> previous, String title, String summary ) {
-		this( previous, Model.of( title ), Model.of( summary ), null );
-	}
-	public AICWizardStep( AICWizardStep<?> previous, String title, String summary, IModel<T> model ) {
-		this( previous, Model.of( title ), Model.of( summary ), model );
-	}
-	public AICWizardStep( AICWizardStep<?> previous, IModel<String> title, IModel<String> summary, IModel<T> model ) {
-		super( previous, title, summary, makeModelIfNull( model ) );
+	public AICWizardStep( AICWizard wizard ) {
+		super( AICWizard.STEP_ID );
+
+		setWizard( wizard );
 		
 		setOutputMarkupId( true );
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static <T> IModel<T> makeModelIfNull( IModel<T> m ) {
-		if ( m == null )
-			return m;
-		else
-			return (IModel<T>) new Model();
+	public final void setWizard( AICWizard w ) {
+		wizard = w;
 	}
+	public final AICWizard getWizard() {
+		return wizard;
+	}
+	
+	public abstract String getTitle();
+	public abstract String getSummary();
+	
+	public abstract AICWizardStep next();
+	public abstract boolean       isLastStep();
+	public abstract boolean       isComplete();
+	
+	public void applyState() {}
+	
+	protected void repaintWithNextAjaxRequest() {
+		AjaxRequestTarget.get().add( this );
+	}
+	
+	private AICWizard wizard;
 }

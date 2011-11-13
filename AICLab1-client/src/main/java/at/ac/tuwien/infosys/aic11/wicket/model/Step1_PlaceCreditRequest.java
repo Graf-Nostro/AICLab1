@@ -1,73 +1,100 @@
 package at.ac.tuwien.infosys.aic11.wicket.model;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.Model;
-import org.apache.wicket.model.PropertyModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
 
+import at.ac.tuwien.infosys.aic11.dto.Address;
+import at.ac.tuwien.infosys.aic11.dto.CreditRequest;
 import at.ac.tuwien.infosys.aic11.dto.Customer;
-import at.ac.tuwien.infosys.aic11.services.RatingService;
+import at.ac.tuwien.infosys.aic11.dto.Warrantor;
+import at.ac.tuwien.infosys.aic11.wicket.view.CustomerEditor;
 
-public class Step1_PlaceCreditRequest extends AICWizardStep<Customer> {
+public class Step1_PlaceCreditRequest extends AICWizardStep {
 	public Step1_PlaceCreditRequest() {
-		this( CompoundPropertyModel.of( Model.of( new Customer() ) ) );
+		Customer c = new Customer();
+		c.setAddress( new Address() );
+		
+		applyState( c, new ArrayList<Warrantor>() );
 	}
-	
-	public Step1_PlaceCreditRequest( CompoundPropertyModel<Customer> model ) {
-		super(
-			null, 
-			"Place credit request", 
-			"Insert the customers data, then press next to get an offer", 
-			model
-		);
-		
-		Customer c = model.getObject();
-		if ( c == null ) {
-			c = new Customer();
-			model.setObject( c );
-		}
-		
-		c.setCustomerId( 5 );
-		c.setFirstName( "A" );
-		c.setLastName( "A" );
-		c.setOpenBalance( BigDecimal.valueOf( 5 ) );
 
-		// members
-		add(
-			makeRequiredTextField( "customerId", c ),
-			makeRequiredTextField( "firstName",  c ),
-			makeTextField( "middleName", c ),
-			makeRequiredTextField( "lastName", c ),
-			makeRequiredTextField( "openBalance", c )
-		);
+	@Override
+	public void applyState() {
+		CreditRequest cr = getWizard().data;
+
+		applyState( cr.getCustomer(), cr.getWarrantors() );
+	}		
+	private void applyState( Customer c, List<Warrantor> ws ) {		
+		this.warrantors = new ArrayList<CustomerEditor<Warrantor>>( ws.size() );
 		
-		// relations
-//		private Address                address;
-//		private DisbursementPreference disbursementPreference;
-//		private Rating                 rating;
-//		private Set<CreditRequest>     creditRequests;
+		for ( Warrantor w : ws ) warrantors.add( new CustomerEditor<Warrantor>( "warrantor", w ) );
+		
+		addOrReplace( customer = new CustomerEditor<Customer>( "customer", c ) );
+		
+		addOrReplace( new ListView<CustomerEditor<Warrantor>>( "warrantors", warrantors ) {
+			@Override
+			protected void populateItem( final ListItem<CustomerEditor<Warrantor>> item ) {
+				item.add( new Label( "warrantorNr", "Warrantor nr.: " + item.getIndex() ) );
+				item.add( item.getModelObject() );
+				
+				item.add( new AjaxLink<Void>("removeWarrantor") {
+					@Override
+					public void onClick( AjaxRequestTarget target ) {
+						warrantors.remove( item.getIndex() );
+						target.add( Step1_PlaceCreditRequest.this );
+					}					
+				});
+			}
+		});
+		
+		addOrReplace( new AjaxLink<Void>("addWarrantor") {
+			@Override
+			public void onClick( AjaxRequestTarget target ) {
+				warrantors.add( CustomerEditor.makeW( "warrantor" ) );				
+				target.add( Step1_PlaceCreditRequest.this );
+			}
+		} );
 	}
 	
-	public AICWizardStep<Decision> next() {
-		return new Step2_DecideOnOffer( this );
+	@Override
+	public AICWizardStep next() {
+		CreditRequest cr = getWizard().data;
+		
+		cr.setCustomer( customer.getData() );
+		
+		List<Warrantor> ws = new ArrayList<Warrantor>( warrantors.size() );
+		
+		for ( CustomerEditor<Warrantor> w : warrantors ) ws.add( w.getData() );
+		
+		cr.setWarrantors( ws );
+		
+		return new Step2_DecideOnOffer( getWizard() );
 	}
 
 	@Override
 	public boolean isLastStep() {
 		return false;
 	}
-	
-	private static <T> RequiredTextField<T> makeRequiredTextField( String property, Customer c ) {
-		return new RequiredTextField<T>( property, PropertyModel.<T>of( c, property ) );
-	}
-	private static <T> TextField<T> makeTextField( String property, Customer c ) {
-		return new TextField<T>( property, PropertyModel.<T>of( c, property ) );
+	@Override
+	public boolean isComplete() {
+		return true;
 	}
 	
-	@Autowired
-	private RatingService ratings;
+	@Override
+	public String getTitle() {
+		return "Place credit request";
+	}
+	@Override
+	public String getSummary() {
+		return "Insert the customers data, then press next to get an offer";
+	}
+	
+	private CustomerEditor<Customer>        customer;
+	private List<CustomerEditor<Warrantor>> warrantors;
+	
 }

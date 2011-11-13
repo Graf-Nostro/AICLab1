@@ -1,44 +1,38 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
 	<table>
+		<!-- customer data -->
 		<tr>
-			<td>
-				<wicket:message key="label.customerId">[customerId]</wicket:message>
-			</td>
-			<td>
-				<input type="text" wicket:id="customerId" />
-			</td>
+			<th>
+				<wicket:message key="label.customer"/>
+			</th>
+		</tr>
+		<tr>
+			<td wicket:id="customer"></td>
+		</tr>
+		<tr>
+			<th>
+				<wicket:message key="label.warrantors"/>
+			</th>
 		</tr>
 		<tr>
 			<td>
-				<wicket:message key="label.firstName">[firstName]</wicket:message>
-			</td>
-			<td>
-				<input type="text" wicket:id="firstName" />
+				<input wicket:id="addWarrantor" value="Add warrantor" type="button">
 			</td>
 		</tr>
-		<tr>
+		<tr wicket:id="warrantors">
 			<td>
-				<wicket:message key="label.middleName">[middleName]</wicket:message>
-			</td>
-			<td>
-				<input type="text" wicket:id="middleName" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<wicket:message key="label.lastName">[lastName]</wicket:message>
-			</td>
-			<td>
-				<input type="text" wicket:id="lastName" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<wicket:message key="label.openBalance">[openBalance]</wicket:message>
-			</td>
-			<td>
-				<input type="text" wicket:id="openBalance" />
+				<table>
+					<tr>
+						<td wicket:id="warrantorNr"/>
+					</tr>
+					<tr>
+						<td wicket:id="warrantor"/>			
+						<td>
+							<input wicket:id="removeWarrantor" value="Remove warrantor" type="button">
+						</td>
+					</tr>
+				</table>
 			</td>
 		</tr>
-    </table>
+   	</table>
 </wicket:panel>

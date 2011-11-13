@@ -12,13 +12,16 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType( name="customer" )
 public class Customer extends DTO {
-	public Customer() {/**/}
+	public Customer() {
+		this.address = new Address();
+	}
 		
 	public Customer( long customerId, String firstName, String middleName,
 			String lastName, BigDecimal openBalance, Address address,
 			DisbursementPreference disbursementPreference, Rating rating,
 			Set<CreditRequest> creditRequests ) {
-		super();
+		this.address = new Address();
+
 		this.customerId = customerId;
 		this.firstName = firstName;
 		this.middleName = middleName;

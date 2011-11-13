@@ -6,6 +6,20 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType( name="address" )
 public class Address extends DTO {
+	
+	
+	public Address() {
+		super();
+	}
+	public Address( String street, String city, String house, String door,
+			String zipCode ) {
+		super();
+		this.street = street;
+		this.city = city;
+		this.house = house;
+		this.door = door;
+		this.zipCode = zipCode;
+	}
 	@XmlAttribute
 	public String getId()      { return id;      }
 	public String getStreet()  { return street;  }

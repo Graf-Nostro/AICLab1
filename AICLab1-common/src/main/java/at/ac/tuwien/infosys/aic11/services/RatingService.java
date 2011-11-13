@@ -14,7 +14,7 @@ public interface RatingService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/ratings/customers/{customer_id}")
-	CustomerRating getRatingForCustomerId( @PathParam("customer_id") long id );
+	Rating getRatingForCustomerId( @PathParam("customer_id") long id );
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
