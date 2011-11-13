@@ -5,7 +5,6 @@ import java.util.List;
 import at.ac.tuwien.infosys.aic11.dto.Rating;
 import at.ac.tuwien.infosys.aic11.mock.RatingServiceMock;
 
-
 public class RatingServiceImpl extends AbstractService implements AbstractRestService, RatingService {
 	private RatingServiceMock mock = new RatingServiceMock();
 	
