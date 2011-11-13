@@ -203,7 +203,7 @@ public class AIC1Client {
 		return getWebService( 
 			serviceClass, 
 			String.format(
-				"http://localhost:%d/%s",
+				"http://localhost:%d/soap/%s",
 				cfg.getInt("http.server.port.ws"),
 				Services.getServiceName( serviceClass )
 			)

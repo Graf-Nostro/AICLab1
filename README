@@ -1,0 +1,16 @@
+
+Download dependencies and compile via
+	mvn compile
+
+In order to start the app it is easiest to create eclipse projects via
+	mvn eclipse:eclipse
+
+you can now start the server by simply running the main method in class AIC1Server in the project AICLab1-server.
+When the server is running you can see a list of available web services by looking at:
+	http://localhost:8081/soap
+
+the client can be started by running the class AIC1Client in project AICLab1-server.
+Once running the client can be accessed at:
+	http://localhost:8080/app
+	
+
