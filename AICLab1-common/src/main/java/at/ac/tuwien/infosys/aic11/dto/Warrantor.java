@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 
 
 @XmlType( name="warrantor" )
-public class Warrantor extends DTO {
+public class Warrantor extends Customer {
 	public Warrantor() {
 		this( new HashSet<CreditRequest>() );
 	}

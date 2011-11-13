@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 
 
 @XmlType( name="customer" )
-public class Customer extends Warrantor {
+public class Customer extends DTO {
 	public Customer() {/**/}
 		
 	public Customer( long customerId, String firstName, String middleName,
@@ -51,7 +51,7 @@ public class Customer extends Warrantor {
 	
 	// relations
 	@XmlElement(required=true)
-	public Address                        getAddress()                { return address;                }
+	public Address                          getAddress()                { return address;                }
 	@XmlElement(name="disbursement_preference",required=true)
 	public DisbursementPreference           getDisbursementPreference() { return disbursementPreference; }
 	@XmlElement(nillable=true)
@@ -59,7 +59,7 @@ public class Customer extends Warrantor {
 	@XmlElement(name="credit_requests", nillable=true)
 	public Set<CreditRequest>               getCreditRequests()         { return creditRequests;         }
 	
-	public void setAddress( Address address )                        { this.address = address;               }
+	public void setAddress( Address address )                          { this.address = address;               }
 	public void setDisbursementPreference( DisbursementPreference d )  { this.disbursementPreference = d;      }
 	public void setRating( Rating rating )                             { this.rating = rating;                 }
 	public void setCreditRequests( Set<CreditRequest> creditRequests ) { this.creditRequests = creditRequests; }
@@ -74,7 +74,7 @@ public class Customer extends Warrantor {
 	private BigDecimal             openBalance;
 	
 	// relations
-	private Address              address;
+	private Address                address;
 	private DisbursementPreference disbursementPreference;
 	private Rating                 rating;
 	private Set<CreditRequest>     creditRequests;	

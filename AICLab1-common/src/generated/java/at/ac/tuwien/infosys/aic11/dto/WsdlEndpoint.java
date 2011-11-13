@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "wsdlEndpoint", propOrder = {
     "location"
 })
-public class WsdlEndpoint {
+public class WsdlEndpoint extends DTO {
 
     protected String location;
 

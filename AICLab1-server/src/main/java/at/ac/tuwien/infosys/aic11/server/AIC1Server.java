@@ -42,8 +42,6 @@ public class AIC1Server {
 			AIC1Server.class        // settings for this class
 		);
 
-//		print( ctx.getBean( "_bean" ) );
-		
 		ctx.getBean( AIC1Server.class ).start();
 	}
 	
@@ -78,7 +76,7 @@ public class AIC1Server {
 			
 			sf.setResourceClasses( serviceClass );
 			sf.setResourceProvider( serviceClass, new SingletonResourceProvider( restService ) );
-			sf.setAddress( "http://localhost:" + restServicePort );
+			sf.setAddress( "http://localhost:" + restServicePort + "/rest/" );
 			
 			BindingFactoryManager manager = sf.getBus().getExtension(BindingFactoryManager.class);
 			JAXRSBindingFactory factory = new JAXRSBindingFactory();

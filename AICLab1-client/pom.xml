@@ -11,6 +11,8 @@
 
 	<properties>
 		<cxf.version>2.5.0</cxf.version>
+		<wicket.version>1.5.2</wicket.version>
+		<jetty.version>8.0.4.v20111024</jetty.version>
 	</properties>
 	
 	<dependencies>
@@ -36,32 +38,63 @@
 			<artifactId>cxf-bundle-jaxrs</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-ws-security</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
 		<!-- Apache Wicket for the WebGUI -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-core</artifactId>
-			<version>1.5.2</version>
+			<version>${wicket.version}</version>
 		</dependency>
-				<!-- Jetty -->
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-extensions</artifactId>
+			<version>${wicket.version}</version>
+		</dependency>		
+		<!-- Jetty -->
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-http</artifactId>
-			<version>8.0.4.v20111024</version>
+			<version>${jetty.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.eclipse.jetty</groupId>
 		    <artifactId>jetty-io</artifactId>
-	    	<version>8.0.4.v20111024</version>
+	    	<version>${jetty.version}</version>
 		</dependency>
 		<dependency>
    			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
-			<version>8.0.4.v20111024</version>
+			<version>${jetty.version}</version>
 		</dependency>
 		<dependency>
     		<groupId>org.eclipse.jetty</groupId>
     		<artifactId>jetty-servlet</artifactId>
-    		<version>8.0.4.v20111024</version>
+    		<version>${jetty.version}</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.eclipse.jetty</groupId>
+    		<artifactId>jetty-servlets</artifactId>
+    		<version>${jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-util</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+		<!-- Spring IoC and AOP -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2.2</version>
 		</dependency>
 	</dependencies>
 
@@ -71,5 +104,24 @@
 		<version>1.0</version>
     	<relativePath>../</relativePath>
 	</parent>
+	
+	<build>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+			<excludes>
+				<exclude>**/*.java</exclude>
+			</excludes>
+			</resource>
+		</resources>	
+	</build>
 </project>
 

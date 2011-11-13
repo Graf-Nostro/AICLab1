@@ -36,7 +36,7 @@ public class JettyConfig {
 
 		// create servlet context 
 		ServletContextHandler servlets = new ServletContextHandler( contexts, "/" );		
-		servlets.addServlet( servlet, "/*");
+		servlets.addServlet( servlet, "/soap/*");
 		
 		return contexts;
 	}

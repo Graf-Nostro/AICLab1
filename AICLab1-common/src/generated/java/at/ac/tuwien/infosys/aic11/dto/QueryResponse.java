@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "queryResponse", propOrder = {
     "_return"
 })
-public class QueryResponse {
+public class QueryResponse extends DTO {
 
     @XmlElement(name = "return")
     protected WsdlEndpoint _return;
