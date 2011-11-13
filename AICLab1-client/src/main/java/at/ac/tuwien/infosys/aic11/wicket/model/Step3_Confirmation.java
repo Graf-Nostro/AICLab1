@@ -3,17 +3,12 @@ package at.ac.tuwien.infosys.aic11.wicket.model;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.AjaxLazyLoadPanel;
-import org.apache.wicket.extensions.wizard.dynamic.IDynamicWizardStep;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.basic.MultiLineLabel;
 
-public class Step3_Confirmation extends AICWizardStep<String> {
-	public Step3_Confirmation() {
-		super(
-			null,
-			"Credit approved",
-			"Thank you for taking a credit at the Goliath National Bank" 
-		);
+public class Step3_Confirmation extends AICWizardStep {
+	public Step3_Confirmation( AICWizard wizard ) {
+		super( wizard );
 
 		AjaxLazyLoadPanel sentMail = new AjaxLazyLoadPanel("sentMail") {
 			@Override
@@ -26,7 +21,8 @@ public class Step3_Confirmation extends AICWizardStep<String> {
 				sendFaxDone = true;
 					
 				AjaxRequestTarget target = AjaxRequestTarget.get();
-				target.add( Step3_Confirmation.this.getParent() );
+
+				target.add( Step3_Confirmation.this );
 
 				return new MultiLineLabel( 
 					markupId,
@@ -45,7 +41,7 @@ public class Step3_Confirmation extends AICWizardStep<String> {
 				disburseDone = true;
 
 				AjaxRequestTarget target = AjaxRequestTarget.get();
-				target.add( Step3_Confirmation.this.getParent() );
+				target.add( Step3_Confirmation.this );
 					
 				return new MultiLineLabel( 
 					markupId,
@@ -55,7 +51,7 @@ public class Step3_Confirmation extends AICWizardStep<String> {
 		};		
 			
 		this.add(
-			new Label( "noJs" ).setOutputMarkupId( true ), 
+			new Label( "noJs", "" ).setOutputMarkupId( true ), 
 			sentMail, 
 			disburseMoney
 		);
@@ -63,14 +59,27 @@ public class Step3_Confirmation extends AICWizardStep<String> {
 
 	@Override
 	public boolean isLastStep() {
+		return true;
+	}
+	@Override
+	public boolean isComplete() {
 		return sendFaxDone && disburseDone;
 	}
-
 	@Override
-	public IDynamicWizardStep next() {
+	public AICWizardStep next() {
 		return null;
 	}
 	
 	private boolean sendFaxDone  = false;
 	private boolean disburseDone = false;
+	
+	@Override
+	public String getTitle() {
+		return "Credit approved";
+	}
+
+	@Override
+	public String getSummary() {
+		return "Thank you for taking a credit at the Goliath National Bank";
+	}
 }

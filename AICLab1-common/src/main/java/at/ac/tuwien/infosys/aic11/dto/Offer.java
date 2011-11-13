@@ -8,6 +8,17 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType(name="offer")
 public class Offer extends DTO {
+	public Offer() {/**/}
+	
+	public Offer( long offerId, String comments, CreditRequest creditRequest,
+			InterestRate interestRate ) {
+		super();
+		this.offerId = offerId;
+		this.comments = comments;
+		this.creditRequest = creditRequest;
+		this.interestRate = interestRate;
+	}
+
 	// members
 	@XmlAttribute(name="offer_id")
 	public long getOfferId()    { return offerId;  }
