@@ -7,12 +7,9 @@
           http://cxf.apache.org/jaxws
           http://cxf.apache.org/schemas/jaxws.xsd">
 
-<<<<<<< HEAD
    <bean id="clientkey" class="at.ac.tuwien.infosys.aic11.client.AIC1Client" 
         factory-bean="clientFactory" factory-method="create"/>
         
-=======
->>>>>>> d09f3d5c07f79e377d84a9f7267739097c9ad7ca
    <bean id="clientFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
      <property name="serviceClass" value="at.ac.tuwien.infosys.aic11.client.AIC1Client"/>
      <!-- <property name="address" value="http://localhost:8080/cxf"/>  -->
