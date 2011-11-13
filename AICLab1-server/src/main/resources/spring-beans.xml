@@ -37,7 +37,7 @@
     
     <jaxws:endpoint id="cmsWS"
        implementor="at.ac.tuwien.infosys.aic11.services.ContractManagementServiceImpl"
-       address="/contractWS"> 
+       address="/soap/contractWS/testEncryption"> 
        <!-- wsdlLocation="WEB-INF/wsdl/cms.wsdl" -->
          <jaxws:outInterceptors>
              <ref bean="TimestampSignEncrypt_Response"/>
