@@ -46,10 +46,14 @@ public class RatingServiceMock {
 		cr2.setRating(new Rating(cr2, CustomerRating.AAPlus));
 		cr3.setRating(new Rating(cr3, CustomerRating.APlus));
 		Set<CreditRequest> creditRequests = new HashSet<CreditRequest>();
-		Set<Warrantor> warrantors = new HashSet<Warrantor>();
+		List<Warrantor> warrantors = new ArrayList<Warrantor>();
 		warrantors.add((Warrantor) cr2);
 		warrantors.add((Warrantor) cr3);
-		creditRequests.add(new CreditRequest(null, null, null, warrantors, 0, null));
+		
+		CreditRequest creditRequest1 = new CreditRequest();
+		creditRequest1.setRequestId(0);
+		creditRequest1.setWarrantors(warrantors);
+		creditRequests.add(creditRequest1);
 		cr1.setCreditRequests(creditRequests);
 	}
 	
