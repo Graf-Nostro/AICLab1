@@ -17,11 +17,13 @@ public class AICSession extends WebSession {
 	}
 	
 	public void storeData( CreditRequest c ) {
-		cr = c;
+		data = c;
 	}
 	public CreditRequest getData() {
-		return cr;
+		return data;
 	}
 	
-	private CreditRequest cr;
+	public CreditRequest data;
+	public CreditRequest offer;
+	
 }

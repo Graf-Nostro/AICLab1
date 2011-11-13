@@ -13,6 +13,7 @@ import at.ac.tuwien.infosys.aic11.dto.Address;
 import at.ac.tuwien.infosys.aic11.dto.CreditRequest;
 import at.ac.tuwien.infosys.aic11.dto.Customer;
 import at.ac.tuwien.infosys.aic11.dto.Warrantor;
+import at.ac.tuwien.infosys.aic11.wicket.AICSession;
 import at.ac.tuwien.infosys.aic11.wicket.view.CustomerEditor;
 
 public class Step1_PlaceCreditRequest extends AICWizardStep {
